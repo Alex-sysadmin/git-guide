@@ -1,10 +1,10 @@
 pid /var/run/nginx.pid;
 worker_processes  auto;
-  
+  ## kolan in parameter haro bayad taqeer bedi vase sorate balatar 
 events {
-    worker_connections   1024;
-    use epoll;
-    multi_accept on;
+    worker_connections   65536; # okeye 
+    use epoll; # okeye 
+    multi_accept on; # okeye 
 }
   
 http {
@@ -18,7 +18,7 @@ http {
     client_max_body_size       10m;
     client_header_buffer_size    1k;
     large_client_header_buffers  4 4k;
-    output_buffers   1 32k;
+    output_buffers   1 32k; # ino vase test ro sefr hm bezar 
     postpone_output  1460;
     
     client_header_timeout  3m;
@@ -57,14 +57,14 @@ http {
     server {
         listen        127.0.0.1;
         server_name   127.0.0.1;
-        root         /var/www/html;
-        access_log   /var/log/nginx.access_log  main;
+        root         /var/www/html; addresse root ham havaset bashe ke hamiun basdhe ke too config asli zadi 
+        access_log   /var/log/nginx.access_log  main; >> addresse log ro havaset bashe 
       
         location / {
             proxy_pass         http://127.0.0.1/;
             proxy_redirect     off;
             proxy_set_header   Host             $host;
-            proxy_set_header   X-Real-IP        $remote_addr;
+            proxy_set_header   X-Real-IP        $remote_addr; >>> ina vase proxye age lazem nadari nazar too config 
             proxy_set_header  X-Forwarded-For  $proxy_add_x_forwarded_for;
             proxy_connect_timeout      90;
             proxy_send_timeout         90;
